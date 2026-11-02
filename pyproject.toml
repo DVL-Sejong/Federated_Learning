@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "defai-research"
+version = "1.0.1"
+description = "Hierarchical Flower aggregation, learned graph deduplication, Transformer transport, and purpose-directed evaluation"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = [
+  "flwr==1.22.0",
+  "numpy==2.3.4",
+  "scipy==1.16.2",
+  "scikit-learn==1.7.2",
+  "threadpoolctl==3.7.0",
+]
+
+[project.optional-dependencies]
+transformer = ["torch==2.6.0"]
+plots = ["matplotlib==3.10.7"]
+
+[project.scripts]
+defai = "defai.cli:main"
+
+[tool.setuptools]
+packages = ["defai", "defai.compression", "defai.federated", "defai.metrics", "defai.metrics.studies"]
+
+[tool.setuptools.package-dir]
+"defai" = "MapReduce_Hierarchical_Federated_Analysis/src/defai"
+"defai.compression" = "MapReduce_Hierarchical_Federated_Analysis/src/defai/compression"
+"defai.federated" = "Graph_Dynamic_Deduplication/src/defai/federated"
+"defai.metrics" = "Federated_Learning_Metrics/src/defai/metrics"
+
+[tool.setuptools.package-data]
+"defai.metrics" = ["*.json"]
+"defai.metrics.studies" = ["*.json"]
