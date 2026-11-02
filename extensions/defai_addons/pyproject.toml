@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "defai-addons"
+version = "3.2.0"
+description = "Independent visualization, comparison and multimodal extensions for deFAI"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+learning = ["numpy>=1.26,<3", "torch>=2.2", "scipy>=1.10", "scikit-learn>=1.3", "flwr>=1.11,<2", "cryptography>=41", "psutil>=5.8"]
+dashboard = ["defai-addons[learning]", "flask>=3"]
+test = ["pytest>=7"]
+
+[project.scripts]
+defai-addons = "defai_addons.cli:main"
+
+[tool.setuptools]
+packages = ["defai_addons", "defai_addons.common", "defai_addons.fl", "defai_addons.monitor", "defai_addons.compare", "defai_addons.multimodal", "defai_addons.multimodal.baselines", "defai_addons.integration"]
+
+[tool.setuptools.package-dir]
+defai_addons = "shared/defai_addons"
+"defai_addons.common" = "shared/defai_addons/common"
+"defai_addons.fl" = "shared/defai_addons/fl"
+"defai_addons.integration" = "shared/defai_addons/integration"
+"defai_addons.monitor" = "01_visualization/defai_addons/monitor"
+"defai_addons.compare" = "02_comparison/defai_addons/compare"
+"defai_addons.multimodal" = "03_multimodal/defai_addons/multimodal"
+"defai_addons.multimodal.baselines" = "03_multimodal/defai_addons/multimodal/baselines"
+
+[tool.setuptools.package-data]
+"defai_addons.monitor" = ["templates/*.html", "static/*.js", "static/*.css"]

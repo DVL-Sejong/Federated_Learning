@@ -1,0 +1,10 @@
+torch>=1.10
+cryptography>=3.4  # AES-GCM authenticated update payloads
+flwr>=1.11        # Flower 연합 학습 프레임워크 (py3.8: 1.11.1, py3.10+: 1.30.0 검증)
+numpy>=1.20
+scipy>=1.6
+scikit-learn>=1.0
+flask>=2.0
+psutil>=5.8
+# 테스트
+pytest>=7.0
