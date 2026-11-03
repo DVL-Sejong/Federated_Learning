@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sejong-defai-modules"
+version = "1.0.0"
+description = "Sejong University deFAI modules: hierarchical FL simulator, security, scenarios, graph pruning, layer-matching KD, data imbalance, network cost"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = {text = "MIT"}
+dependencies = [
+    "torch>=2.6",
+    "torchvision>=0.21",
+    "flwr==1.42.0",
+    "Flask>=3.1,<4",
+    "requests>=2.31",
+    "psutil>=5.9",
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+kist = ["flwr-datasets[vision]==0.6.1", "pillow>=10"]
+test = ["pytest>=8"]
+
+[tool.setuptools]
+packages = ["fl_core", "hierarchical_fl", "security_sim", "scenario_test", "graph_pruning", "layer_kd",
+            "data_imbalance", "network_cost"]
+
+[tool.setuptools.package-data]
+hierarchical_fl = ["templates/*.html", "static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
