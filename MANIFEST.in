@@ -1,8 +1,0 @@
-include LICENSE README.md
-recursive-include docs *.md *.json
-recursive-include tests *.py
-recursive-include scripts *.py
-recursive-include MapReduce_Hierarchical_Federated_Analysis *.py *.md *.json
-recursive-include Graph_Dynamic_Deduplication *.py *.md *.json *.ipynb
-recursive-include Federated_Learning_Metrics *.py *.md *.json
-global-exclude __pycache__ *.py[cod]

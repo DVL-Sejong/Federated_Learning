@@ -44,7 +44,7 @@ JSD와 엔트로피 또는 상호 정보량은 그 값만으로 융합이나 지
 ```python
 import json
 import numpy as np
-from defai.metrics import (
+from defai_research.metrics import (
     communication_metrics, convergence_time, evaluate16,
 )
 
@@ -81,9 +81,9 @@ rows = evaluate16(
 이와 같은 정의역 문제는 `not_measured`와 구분
 
 ```sh
-defai metrics-schema
-defai metrics --input predictions.npz --observations observations.json --output results/metrics.json
-defai metrics --help
+defai-research metrics-schema
+defai-research metrics --input predictions.npz --observations observations.json --output results/metrics.json
+defai-research metrics --help
 ```
 
 ## 실제 목적별 실험 실행
@@ -94,38 +94,38 @@ defai metrics --help
 
 ```sh
 # 실제 가속도 및 자이로 자료 준비, 학습과 센서 및 노드 대조, 독립 검산
-defai metric-study multimodal -- --download --prepare-only
-defai metric-study multimodal
-defai metric-study verify-multimodal
-defai metric-study crossnode
-defai metric-study cross-verify-multimodal
+defai-research metric-study multimodal -- --download --prepare-only
+defai-research metric-study multimodal
+defai-research metric-study verify-multimodal
+defai-research metric-study crossnode
+defai-research metric-study cross-verify-multimodal
 
 # 별도 프로세스 Flower 학습, 실제 TCP 프레임과 복원 및 자원 측정
-defai metric-study system -- --stage protocol
-defai metric-study system -- --stage main
-defai metric-study transport-echo
-defai metric-study verify-system
-defai metric-study export-system
-defai metric-study recovery
+defai-research metric-study system -- --stage protocol
+defai-research metric-study system -- --stage main
+defai-research metric-study transport-echo
+defai-research metric-study verify-system
+defai-research metric-study export-system
+defai-research metric-study recovery
 
 # 실제 클리핑과 Gaussian 잡음, 고정된 회원추론 공격 및 공개 범위 검산
-defai metric-study privacy
-defai metric-study privacy-control
-defai metric-study verify-privacy
-defai metric-study export-privacy
+defai-research metric-study privacy
+defai-research metric-study privacy-control
+defai-research metric-study verify-privacy
+defai-research metric-study export-privacy
 ```
 
 시스템 파이프라인의 짧은 실행 확인은 다음 명령을 사용
 5라운드의 진단 실험이며 전체 평가 결과를 대신하지 않음
 
 ```sh
-defai metric-study --workspace ./metric-workspace system -- --stage smoke
-defai metric-study --workspace ./metric-workspace verify-system
+defai-research metric-study --workspace ./metric-workspace system -- --stage smoke
+defai-research metric-study --workspace ./metric-workspace verify-system
 
-defai metric-study system -- --help
-defai metric-study multimodal -- --help
-defai metric-study privacy -- --help
-python -m defai.metrics.studies.purpose_system_study --help
+defai-research metric-study system -- --help
+defai-research metric-study multimodal -- --help
+defai-research metric-study privacy -- --help
+python -m defai_research.metrics.studies.purpose_system_study --help
 ```
 
 HAR 실험의 `runs/<실행명>/classification_metrics.json`에 클래스별 정밀도, 재현율, F1, 실제 표본수, 예측 표본수와 혼동행렬을 기록

@@ -1,4 +1,3 @@
-"""Build an allowlisted source archive; never bundle generated research data."""
 from __future__ import annotations
 
 import argparse
@@ -8,17 +7,16 @@ from pathlib import Path
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.0.1"
+VERSION = "1.1.0"
 TOP = "Federated_Learning"
-DIRECTORIES = ("MapReduce_Hierarchical_Federated_Analysis",
-               "Graph_Dynamic_Deduplication", "Federated_Learning_Metrics",
-               "tests", "scripts", "docs")
-ROOT_FILES = ("README.md", "LICENSE", "pyproject.toml", "MANIFEST.in", ".gitignore")
-SUFFIXES = {".py", ".md", ".toml", ".json", ".ipynb", ".yml", ".yaml"}
+DIRECTORIES = ("1_simulation", "2_analysis_speed", "3_heterogeneous_data", "common", "examples", "tests",
+               "scripts", "docs")
+ROOT_FILES = ("README.md", "LICENSE", "pyproject.toml", ".gitignore")
+SUFFIXES = {".py", ".md", ".toml", ".json", ".ipynb", ".yml", ".yaml", ".html", ".js", ".css", ".csv", ".txt",
+            ".code-workspace"}
 
 
 def payloads():
-    """Explicit directories and source types exclude outputs even in a used tree."""
     selected = [ROOT / name for name in ROOT_FILES]
     for directory in DIRECTORIES:
         path = ROOT / directory
@@ -46,7 +44,7 @@ def payloads():
 def build(output: Path):
     files = payloads()
     manifest = {
-        "project": "defai-research", "version": VERSION, "license": "MIT",
+        "project": "sejong-defai", "version": VERSION, "license": "MIT",
         "scope": "Source, tests, configuration and documentation only; no datasets, trained weights, predictions or experiment outputs",
         "files": {name: {"bytes": len(content), "sha256": hashlib.sha256(content).hexdigest()}
                   for name, content in files.items()},
